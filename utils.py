@@ -1,5 +1,7 @@
-import pandas as pd
+import re
+
 from openpyxl.workbook import Workbook
+from python_calamine import CalamineWorkbook
 
 
 def find_matches_for_word(word, _list, cur_index):
@@ -10,13 +12,17 @@ def find_matches_for_word(word, _list, cur_index):
             sentence = _list[i][1].split()
 
 
+def read_exel(filename='test.xlsx', sheet_name='Лист1'):
+    workbook = CalamineWorkbook.from_path(f'{filename}')
+    return workbook.get_sheet_by_name(f'{sheet_name}').to_python(skip_empty_area=False)
+
+
 """
 Находит номера деталей, далее в функции find_matches_for_word начинает перебирать список parts_list для поиска совпадений
 """
-import re
 
 
-def write_to_exel(data):
+def write_to_exel(data, filename="output.xlsx"):
     flattened_data = []
     wb = Workbook()
     ws = wb.active
@@ -24,9 +30,7 @@ def write_to_exel(data):
     for index, value in enumerate(data, start=1):
         ws.cell(row=index, column=1, value=value)
 
-    wb.save('output.xlsx')
-
-
+    wb.save(f'{filename}')
 
 
 def find_duplicates(parts):
