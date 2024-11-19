@@ -77,3 +77,8 @@ def find_partnumber(parts_list=None,
             part_number_names.append(parts_temp_store)
 
     return part_number_names
+
+
+def join_sublist(input_list):
+    # Удаляем пустые строки и объединяем элементы каждого подсписка
+    return [[' '.join(sublist)] if sublist else [''] for sublist in input_list]

@@ -7,9 +7,11 @@
 # print(partnumber_list[24350])
 # print(parts_list)
 
-from utils import find_partnumber, write_to_exel, find_duplicates, read_exel
+from utils import find_partnumber, write_to_exel, find_duplicates, read_exel, join_sublist
 
-list_ = read_exel('test.xlsx', 'Лист1')
+list_ = read_exel('Приложение №3. Заявка участника конкурса Ремонт Оргтехники_С ЦЕНАМИ4.xlsx', 'Лист1')
 partnumber_list = find_partnumber(list_)
-duplicate_list = find_duplicates(partnumber_list)
-write_to_exel(duplicate_list)
+
+#duplicate_list = find_duplicates(partnumber_list)
+print(partnumber_list)
+write_to_exel(join_sublist(partnumber_list), 'out')
