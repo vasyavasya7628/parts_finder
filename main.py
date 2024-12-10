@@ -12,6 +12,10 @@ from utils import find_partnumber, write_to_exel, find_duplicates, read_exel, jo
 list_ = read_exel('Приложение №3. Заявка участника конкурса Ремонт Оргтехники_С ЦЕНАМИ4.xlsx', 'Лист1')
 partnumber_list = find_partnumber(list_)
 
-#duplicate_list = find_duplicates(partnumber_list)
-print(partnumber_list)
-write_to_exel(join_sublist(partnumber_list), 'out')
+duplicate_list = find_duplicates(partnumber_list)
+print(duplicate_list)
+for item in duplicate_list:
+    if item != '':
+        print(item)
+
+write_to_exel(duplicate_list, 'output.xlsx')

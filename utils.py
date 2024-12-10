@@ -21,7 +21,6 @@ def read_exel(filename='test.xlsx', sheet_name='Лист1'):
 Находит номера деталей, далее в функции find_matches_for_word начинает перебирать список parts_list для поиска совпадений
 """
 
-
 def write_to_exel(data, filename="output.xlsx"):
     flattened_data = []
     wb = Workbook()
@@ -80,5 +79,7 @@ def find_partnumber(parts_list=None,
 
 
 def join_sublist(input_list):
-    # Удаляем пустые строки и объединяем элементы каждого подсписка
-    return [[' '.join(sublist)] if sublist else [''] for sublist in input_list]
+    for i, x in enumerate(input_list):
+        if isinstance(x, list):
+            input_list[i] = ' '.join(map(str, x))
+    return input_list
